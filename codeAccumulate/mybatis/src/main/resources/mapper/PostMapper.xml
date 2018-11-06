@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.sunsky.manytoone.dao.PostDao">
+
+    <resultMap type = "Post" id = "resultUserMap">
+        <result property = "postId" column = "post_id"/>
+        <result property = "title" column = "content"/>
+        <result property = "content" column = "content"/>
+        <association property="user" javaType="User">
+            <id property="userId" column="userid"/>
+            <result property="name" column="username"/>
+            <result property="phoneNum" column="mobile"/>
+        </association>
+    </resultMap>
+
+    <select id="findByPostId" resultMap="resultUserMap" parameterType="int">
+        select u.id,u.username,u.mobile,p.post_id,p.title,p.content
+        from user u,post p
+        where u.id = p.userid and p.post_id = #{postId}
+    </select>
+
+</mapper>

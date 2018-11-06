@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsky.manytomany.dao.PeopleGroupDao">
+
+    <parameterMap type="PeopleGroups" id="parameterUserGroupMap">
+        <parameter property="userId"/>
+        <parameter property="groupId"/>
+    </parameterMap>
+
+    <insert id="insertUserGroup"  parameterMap="parameterUserGroupMap">
+        INSERT INTO user_groups(user_id, group_id)
+        VALUES(#{userId},#{groupId})
+    </insert>
+
+
+    <!-- 根据一个用户组ID,查看这个用户组下的所有用户 -->
+    <resultMap type="People" id="resultUserMap_2">
+        <result property="id" column="id"/>
+        <result property="name" column="username"/>
+        <result property="phoneNum" column="mobile"/>
+    </resultMap>
+
+    <select id="getUsersByGroupId" resultMap="resultUserMap_2" parameterType="int">
+        SELECT p.id , p.username, p.mobile , ug.group_id
+        FROM people p, user_groups ug
+        WHERE p.id = ug.user_id AND ug.group_id=#{groupId}
+    </select>
+
+    <!-- 根据一个用户ID,查看这个用户所对应的组-->
+    <resultMap type="Groups" id="resultGroupMap_2">
+        <result property="id" column="group_id"/>
+        <result property="name" column="group_name"/>
+    </resultMap>
+
+    <select id="getGroupsByUserId" resultMap="resultGroupMap_2" parameterType="int">
+        SELECT g.group_id , g.group_name , u.user_id
+        FROM groups g, user_groups u
+        WHERE g.group_id=u.group_id AND u.user_id=#{userId}
+    </select>
+</mapper>

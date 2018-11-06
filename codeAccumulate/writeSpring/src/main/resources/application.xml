@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+
+    <bean id="hostess" class="com.sunsky.spring.Person">
+        <property name ="userName" value = "admin"></property>
+        <property name ="passWord" value = "admin"></property>
+    </bean>
+
+    <!--<bean id="hostess" class="com.sunsky.spring.Person">-->
+        <!--<constructor-arg value="userName" index="1"></constructor-arg>-->
+        <!--<constructor-arg value="passWord" index="2"></constructor-arg>-->
+    <!--</bean>-->
+
+
+    <component-scan base-package="com.sunsky.spring.demo" >
+    </component-scan>
+
+</beans>

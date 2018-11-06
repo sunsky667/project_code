@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <typeAlias alias="User" type="com.sunsky.onetomany.entity.User" />
+        <typeAlias alias="Post" type="com.sunsky.onetomany.entity.Post" />
+        <typeAlias alias="PeopleGroups" type="com.sunsky.manytomany.entity.PeopleGroups"></typeAlias>
+        <typeAlias alias="People" type="com.sunsky.manytomany.entity.People"></typeAlias>
+        <typeAlias alias="Groups" type="com.sunsky.manytomany.entity.Groups"></typeAlias>
+    </typeAliases>
+
+    <environments default="environment">
+        <environment id="environment">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/mydatabase" />
+                <property name="username" value="root" />
+                <property name="password" value="sunsky667" />
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!-- 指定映射文件的位置 -->
+    <mappers>
+        <!--用mapper resource加载单一的映射文件-->
+        <!---->
+        <mapper resource="mapper/User.xml" />
+        <mapper resource="mapper/PostMapper.xml"/>
+        <mapper resource="mapper/GroupMapper.xml"/>
+        <mapper resource="mapper/PeopleMapper.xml"/>
+        <mapper resource="mapper/PeopleGroupMapper.xml"/>
+
+
+        <!--用mapper class接口加载单一的映射文件-->
+        <!--
+        <mapper class = "com.sunsky.simple.dao.PersonDao"/>
+        -->
+
+        <!--通过扫描接口批量加载mapper-->
+        <!--
+        <mapper package = "com.sunsky.simple.dao"/>
+        -->
+
+
+    </mappers>
+
+</configuration>

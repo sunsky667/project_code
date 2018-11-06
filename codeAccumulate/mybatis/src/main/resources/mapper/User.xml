@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.sunsky.onetomany.dao.UserDao">
+
+    <resultMap type = "User" id = "resultUserMap">
+        <result property = "userId" column = "id"/>
+        <result property = "name" column = "username"/>
+        <result property = "phoneNum" column = "mobile"/>
+
+        <collection property="posts" ofType="com.sunsky.onetomany.entity.Post" column="userid">
+            <id property="postId" column="post_id" javaType="int" jdbcType="INTEGER"/>
+            <result property="title" column="title" javaType="string" jdbcType="VARCHAR"/>
+            <result property="content" column="content" javaType="string" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <select id="findByUserId" resultMap="resultUserMap" parameterType="int">
+        select u.id,u.username,u.mobile,p.post_id,p.title,p.content
+        from user u,post p
+        where u.id = p.userid and u.id = #{userId}
+    </select>
+
+</mapper>

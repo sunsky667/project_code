@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="sunsky.dao.master.UserDao">
+
+	<resultMap type="sunsky.entity.User" id="user">
+		<result property="id" column="id" />
+		<result property="name" column="username" />
+		<result property="mobile" column="mobile" />
+        <result property="created" column="created"/>
+	</resultMap>
+
+	<select id="queryById" parameterType="int" resultMap="user">
+		select id,username,mobile,created from user where id = #{id}
+	</select>
+
+    <select id="queryUsers" resultMap="user">
+        select id,username,mobile,created from user limit 10
+    </select>
+</mapper>
