@@ -9,7 +9,7 @@ import java.util.List;
 
  * @VM args:-verbose:gc -Xms20M -Xmx20M -XX:+PrintGCDetails
 
- * @FileNmae com.yhj.jvm.memory.heap.HeapOutOfMemory.java
+ * @FileNmae HeapOutOfMemory.java
 
  */
 
