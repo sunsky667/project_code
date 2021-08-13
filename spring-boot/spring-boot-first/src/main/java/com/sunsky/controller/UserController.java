@@ -37,4 +37,11 @@ public class UserController {
         result.put("desc","success");
         return result;
     }
+
+    @RequestMapping("asyncAddUser")
+    @ResponseBody
+    public String asyncInsertUser(){
+        userService.insertUser();
+        return "success";
+    }
 }

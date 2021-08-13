@@ -5,6 +5,7 @@ import com.sunsky.entity.User;
 import java.util.List;
 
 public interface UserService {
-    public User queryUserById(Integer id);
-    public List<User> queryUsers();
+    User queryUserById(Integer id);
+    List<User> queryUsers();
+    void insertUser();
 }

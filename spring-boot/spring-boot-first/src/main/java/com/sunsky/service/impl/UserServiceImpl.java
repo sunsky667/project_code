@@ -1,5 +1,7 @@
 package com.sunsky.service.impl;
 
+import com.sunsky.async.ThreadPoolUtil;
+import com.sunsky.async.UserAsyncTask;
 import com.sunsky.dao.UserDao;
 import com.sunsky.entity.User;
 import com.sunsky.service.UserService;
@@ -22,5 +24,11 @@ public class UserServiceImpl implements UserService{
     public List<User> queryUsers() {
         List<User> users = userDao.queryUsers();
         return users;
+    }
+
+    public void insertUser() {
+        UserAsyncTask userAsyncTask = new UserAsyncTask();
+        userAsyncTask.setUserDao(userDao);
+        ThreadPoolUtil.executorService.execute(userAsyncTask);
     }
 }
